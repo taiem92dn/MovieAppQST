@@ -20,7 +20,9 @@
         android:name="com.tngdev.movieappqst.ui.detail.MovieDetailFragment"
         android:label="@string/movie_detail_fragment_label"
         tools:layout="@layout/fragment_movie_detail">
-
+        <argument
+            android:name="movieItem"
+            app:argType="com.tngdev.movieappqst.model.MovieItem" />
         <action
             android:id="@+id/action_DetailFragment_to_MovieListFragment"
             app:destination="@id/MovieListFragment" />
