@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.MovieDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/bt_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/text_movies"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:drawableStartCompat="@drawable/ic_back" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:background="@color/divider_color" />
+
+        </FrameLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_image"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_movie_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_marginTop="@dimen/padding_small"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/cv_image"
+            tools:text="Movie Title (2020)" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@id/tv_movie_title"
+            tools:text="7.8/10" />
+
+        <Button
+            android:id="@+id/bt_add_to_watchlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddinng_medium"
+            android:text="@string/text_add_to_watchlist"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+        <Button
+            android:id="@+id/bt_watch_trailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddinng_medium"
+            android:text="@string/text_watch_trailer"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/bt_add_to_watchlist" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/paddinng_medium"
+            android:background="@color/divider_color"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@id/cv_image"/>
+
+        <TextView
+            android:id="@+id/text_short_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddinng_medium"
+            android:text="@string/text_short_description"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+
+        <TextView
+            android:id="@+id/tv_movie_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:text="Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum Lorem ipum "
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/text_short_desc" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/paddinng_medium"
+            android:background="@color/divider_color"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_desc"/>
+
+        <TextView
+            android:id="@+id/text_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddinng_medium"
+            android:text="@string/text_details"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/divider2"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+
+        <TextView
+            android:id="@+id/text_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_genre"
+            android:layout_marginTop="@dimen/padding_small"
+            app:layout_constraintEnd_toEndOf="@+id/text_release_date"
+            app:layout_constraintTop_toBottomOf="@id/text_details" />
+
+        <TextView
+            android:id="@+id/text_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_released_date"
+            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"/>
+
+        <TextView
+            android:id="@+id/tv_movie_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_small"
+            app:layout_constraintStart_toEndOf="@+id/text_genre"
+            app:layout_constraintTop_toTopOf="@+id/text_genre"
+            tools:text="Action, Scifi" />
+
+        <TextView
+            android:id="@+id/tv_movie_released_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_small"
+            app:layout_constraintStart_toEndOf="@+id/text_release_date"
+            app:layout_constraintTop_toTopOf="@+id/text_release_date"
+            tools:text="2020, 3 September" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
