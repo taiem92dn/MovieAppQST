@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.tngdev.movieappqst.R
 import com.tngdev.movieappqst.model.MovieItem
 import com.tngdev.movieappqst.util.Utils
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,6 +23,13 @@ class LocalMovieDataSource @Inject constructor(
     val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : MovieDataSource {
 
+    private val imgResArray = intArrayOf(
+        R.drawable.tenet,
+        R.drawable.spider_man,
+        R.drawable.knives_out,
+        R.drawable.guardians_of_the_galaxy,
+        R.drawable.avengers
+    )
 
     private val _movieListFlow = MutableStateFlow<List<MovieItem>>(listOf())
 
@@ -36,7 +44,11 @@ class LocalMovieDataSource @Inject constructor(
                 )
             }
 
-            _movieListFlow.value = list
+            _movieListFlow.value = list.mapIndexed { index, movieItem ->
+                movieItem.apply {
+                    imageRes = imgResArray[index]
+                }
+            }
         }
 
         return _movieListFlow

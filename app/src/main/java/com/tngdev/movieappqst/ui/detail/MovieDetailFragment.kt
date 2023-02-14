@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tngdev.movieappqst.databinding.FragmentMovieDetailBinding
 import com.tngdev.movieappqst.ui.list.MovieListViewModel
+import com.tngdev.movieappqst.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,8 @@ class MovieDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     val args: MovieDetailFragmentArgs by navArgs()
+
+    val movieItem get() = args.movieItem
 
     private val viewModel by lazy { ViewModelProvider(this).get(MovieDetailViewModel::class.java) }
 
@@ -48,10 +51,23 @@ class MovieDetailFragment : Fragment() {
         }
 
         binding.btAddToWatchlist.setOnClickListener {
-            viewModel.updateOnMyWatchList(args.movieItem, !args.movieItem.isOnMyWatchList)
+            viewModel.updateOnMyWatchList(movieItem, !args.movieItem.isOnMyWatchList)
 
-            binding.movieItem = args.movieItem
+            binding.movieItem = movieItem
             binding.executePendingBindings()
+        }
+
+        binding.btWatchTrailer.setOnClickListener {
+            openTrailerLink(movieItem.trailerLink)
+        }
+    }
+
+    private fun openTrailerLink(trailerLink: String) {
+        if (trailerLink.contains("youtube")) {
+            Utils.openYoutubeLink(
+                requireContext(),
+                trailerLink.substring(trailerLink.indexOf('=') + 1)
+            )
         }
     }
 

@@ -13,10 +13,10 @@ fun setMovieSubtitle(textView: TextView, movieItem: MovieItem) {
 
 @BindingAdapter("movieRate")
 fun setMovieRate(textView: TextView, movieItem: MovieItem) {
-    textView.text = String.format("${movieItem.rating}/10")
+    textView.text = String.format("${movieItem.rating}")
 }
 
 @BindingAdapter("movieImage")
 fun loadMovieImage(imageView: ImageView, movieItem: MovieItem) {
-//    imageView.setImageResource()
+    imageView.setImageResource(movieItem.imageRes)
 }

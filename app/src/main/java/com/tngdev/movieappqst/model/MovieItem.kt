@@ -1,14 +1,15 @@
 package com.tngdev.movieappqst.model
 
 import android.os.Parcelable
+import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieItem(
-    @IdRes
-    val imageRes: Int,
+    @DrawableRes
+    var imageRes: Int,
     val title: String,
     val description: String,
     val rating: Float,

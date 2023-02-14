@@ -1,6 +1,9 @@
 package com.tngdev.movieappqst.util
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -32,5 +35,16 @@ object Utils {
             }
         }
         return returnString.toString()
+    }
+
+    fun openYoutubeLink(context: Context, youtubeID: String) {
+        val intentApp = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$youtubeID"))
+        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + youtubeID))
+        try {
+            context.startActivity(intentApp)
+        } catch (ex: ActivityNotFoundException) {
+            context.startActivity(intentBrowser)
+        }
+
     }
 }
