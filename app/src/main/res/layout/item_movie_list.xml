@@ -6,6 +6,7 @@
     <data>
 
         <import type="com.tngdev.movieappqst.model.MovieItem" />
+        <import type="android.view.View"/>
 
         <variable
             name="movieItem"
@@ -69,6 +70,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/text_on_my_watchlist"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:visibility="@{movieItem.onMyWatchList ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/cv_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"

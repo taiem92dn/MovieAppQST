@@ -5,13 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tngdev.movieappqst.databinding.FragmentMovieDetailBinding
+import com.tngdev.movieappqst.ui.list.MovieListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
     private var _binding: FragmentMovieDetailBinding? = null
@@ -21,6 +22,8 @@ class MovieDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     val args: MovieDetailFragmentArgs by navArgs()
+
+    private val viewModel by lazy { ViewModelProvider(this).get(MovieDetailViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +40,18 @@ class MovieDetailFragment : Fragment() {
 
         bindData()
         bindEvent()
-//        binding.buttonSecond.setOnClickListener {
-//            findNavController().navigate(R.id.action_DetailFragment_to_MovieListFragment)
-//        }
     }
 
     private fun bindEvent() {
         binding.btBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.btAddToWatchlist.setOnClickListener {
+            viewModel.updateOnMyWatchList(args.movieItem, !args.movieItem.isOnMyWatchList)
+
+            binding.movieItem = args.movieItem
+            binding.executePendingBindings()
         }
     }
 

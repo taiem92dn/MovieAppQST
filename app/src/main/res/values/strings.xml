@@ -10,9 +10,12 @@
     <string name="text_sort">Sort</string>
     <string name="text_on_my_watchlist">ON MY WATCHLIST</string>
     <string name="text_add_to_watchlist">ADD TO WATCHLIST</string>
+    <string name="text_remove_from_watchlist">REMOVE FROM WATCHLIST</string>
     <string name="text_watch_trailer">WATCH TRAILER</string>
     <string name="text_short_description">Short description</string>
     <string name="text_details">Details</string>
     <string name="text_genre">Genre</string>
     <string name="text_released_date">Released date</string>
+    <string name="text_title">Title</string>
+    <string name="text_cancel">Cancel</string>
 </resources>

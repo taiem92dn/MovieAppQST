@@ -1,15 +1,17 @@
 package com.tngdev.movieappqst.ui.list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.tngdev.movieappqst.R
+import com.tngdev.movieappqst.data.SortBy
 import com.tngdev.movieappqst.databinding.FragmentMovieListBinding
 import com.tngdev.movieappqst.model.MovieItem
+import com.tngdev.movieappqst.ui.bottomdialog.SortBottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,6 +46,14 @@ class MovieListFragment : Fragment() {
         bindData()
 
         binding.rvMovieList.adapter = moviesAdapter
+
+        setFragmentResultListener(SortBottomSheetDialog.REQUEST_KEY_SORT_BY) { requestKey, bundle ->
+            val sortByStr = bundle.getString(
+                SortBottomSheetDialog.BUNDLE_KEY_SORT_BY,
+                SortBy.None.toString()
+            )
+            viewModel.setSortBy(SortBy.valueOf(sortByStr))
+        }
     }
 
     private fun bindData() {
@@ -53,6 +63,12 @@ class MovieListFragment : Fragment() {
         moviesAdapter.onItemClickListener = {
             navigateToMovieDetail(it)
         }
+
+        binding.tvSort.setOnClickListener {
+            SortBottomSheetDialog.newInstance(viewModel.sortByState.value)
+                .show(parentFragmentManager, SortBottomSheetDialog.TAG)
+        }
+
     }
 
     private fun initAdapter() {
