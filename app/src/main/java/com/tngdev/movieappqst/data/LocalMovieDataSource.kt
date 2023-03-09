@@ -2,6 +2,7 @@ package com.tngdev.movieappqst.data
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tngdev.movieappqst.R
@@ -34,6 +35,19 @@ class LocalMovieDataSource @Inject constructor(
     private val _movieListFlow = MutableStateFlow<List<MovieItem>>(listOf())
 
     override suspend fun getMovieList(): Flow<List<MovieItem>> {
+
+        // get the indexes were saved from SharePreference
+        val sharePreferences = application.getSharedPreferences("movie", 0)
+        val idxStr = sharePreferences.getString("watchlist", "")
+        val idxList = if (idxStr?.length == 0) {
+            listOf()
+        }
+        else {
+            idxStr?.split(" ")?.map {
+                it.toInt()
+            } ?: listOf()
+        }
+
         // fetch list for the first time
         if (_movieListFlow.value.isEmpty()) {
             val list = withContext(ioDispatcher) {
@@ -47,6 +61,10 @@ class LocalMovieDataSource @Inject constructor(
             _movieListFlow.value = list.mapIndexed { index, movieItem ->
                 movieItem.apply {
                     imageRes = imgResArray[index]
+
+                    if (idxList.indexOf(index) != -1) {
+                        isOnMyWatchList = true
+                    }
                 }
             }
         }
@@ -74,6 +92,21 @@ class LocalMovieDataSource @Inject constructor(
         if (idx != -1) {
             _movieListFlow.value[idx].isOnMyWatchList = isOnMyWatchList
         }
+
+        // save the current indexes in OnMyWatchList into SharePreference
+        val sharePreferences = application.getSharedPreferences("movie", 0)
+        var idxStr = StringBuilder()
+        for (i in 0 until _movieListFlow.value.size) {
+            if (_movieListFlow.value[i].isOnMyWatchList) {
+                idxStr.append(i)
+                idxStr.append(" ")
+            }
+        }
+
+
+        sharePreferences.edit()
+            .putString("watchlist", idxStr.trim().toString())
+            .apply()
 
     }
 

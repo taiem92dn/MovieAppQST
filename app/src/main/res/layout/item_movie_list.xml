@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="@{movieItem.title}"
+            movieTitle="@{movieItem}"
             app:layout_constraintBottom_toTopOf="@+id/tv_movie_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
